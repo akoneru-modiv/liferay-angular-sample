@@ -1,0 +1,35 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring3-3.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"></meta>
+  <title>Phone</title>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    var PhoneConfig = {
+            ajaxUrl: /*[[${ajaxURL}]]*/ "/api/",
+            isStandalone: /*[[${standalone}]]*/ true,
+            portletAppContextPath: /*[[${portletAppContextPath}]]*/ '',
+            phoneListTemplate: /*[[@{/js/phone-list/phone-list.template.html}]]*/ '/js/phone-list/phone-list.template.html'
+    };
+    
+    
+    /*]]>*/
+  </script>
+  <link rel="stylesheet" th:href="@{/resources/bower_components/bootstrap/dist/css/bootstrap.css}"/>
+  <script th:src="@{/resources/bower_components/angular/angular.js}"></script>
+  <script th:src="@{/resources/bower_components/angular-route/angular-route.js}"></script>
+  <script th:src="@{/resources/bower_components/angular-resource/angular-resource.js}"></script>
+  <script th:src="@{/resources/bower_components/angular-route/angular-route.js}"></script>
+  <script th:src="@{/js/phone-list/phone-list.module.js}"></script>
+  <script th:src="@{/js/phone-list/phone-list.component.js}"></script>
+  <script th:src="@{/js/app.module.js}"></script>
+  
+</head>
+
+<body ng-app="phoneCatApp">
+    <div>
+        <phone-list></phone-list>
+    </div>
+</body>
+</html>

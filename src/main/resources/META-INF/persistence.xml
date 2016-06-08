@@ -1,0 +1,17 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+	<persistence-unit name="hibernatePersistenceUnit" transaction-type="RESOURCE_LOCAL">
+		
+		<class>net.securus.wccs.entity.AccountCategory</class>
+		<class>net.securus.wccs.entity.ActivityCategory</class>
+		<class>net.securus.wccs.entity.ActivityDefinition</class>
+		<class>net.securus.wccs.entity.WebUserActivityAudit</class>
+ 		<class>net.securus.wccs.entity.StatusDef</class>
+ 		<class>net.securus.wccs.entity.CountryLookup</class>
+ 		<class>net.securus.wccs.entity.WccsAuditView</class>
+ 		<class>net.securus.wccs.entity.WebUserActivation</class>
+ 		<non-jta-data-source>java:comp/env/jdbc/WCCSDS</non-jta-data-source>
+		
+	</persistence-unit>
+
+</persistence>

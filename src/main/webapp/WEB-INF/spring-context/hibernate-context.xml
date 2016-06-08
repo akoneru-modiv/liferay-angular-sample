@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans" 
+       	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       	xmlns:p="http://www.springframework.org/schema/p" 
+       	xmlns:tx="http://www.springframework.org/schema/tx"
+       	xmlns:context="http://www.springframework.org/schema/context"
+       	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	   		">
+	   		
+	<!-- Datasource for wccs database -->
+	<!--  <bean id="wccsDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${wccs.database.driver}" />
+		<property name="url" value="${wccs.database.url}" />
+		<property name="username" value="${wccs.database.user}" />
+		<property name="password" value="${wccs.database.user}" />
+		<qualifier value="wccsDS" />
+	</bean> -->
+	
+   <bean id="wccsDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName">
+            <value>java:comp/env/jdbc/WCCSDS</value>
+        </property>
+    </bean> 
+
+	<tx:annotation-driven transaction-manager="wccsTransactionManager"/>
+	<bean id="wccsTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>   
+          
+    <!-- Declare a JPA entityManagerFactory-->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">  
+           <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />  
+           <property name="persistenceUnitName" value="hibernatePersistenceUnit" />  
+           <property name="dataSource" ref="wccsDataSource" />  
+           <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>  
+           <property name="jpaDialect" ref="jpaDialect"/>  
+      </bean>  
+      
+      <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>  
+      <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+	   		
+</beans>

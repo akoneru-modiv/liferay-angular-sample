@@ -1,0 +1,10 @@
+#So ignores
+/target/
+/node_modules/
+/src/main/webapp/resources/
+*.classpath
+*.project
+*.settings
+*.idea
+*.iml
+*.tern-project
